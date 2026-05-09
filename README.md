@@ -34,7 +34,7 @@ AKDEV Ultra Tools is a futuristic browser-based utility platform with 50+ tools 
 
 
 
-https://akdev-official.vercel.app
+https://akdev-official.vercel.app/tools
 
 
 
