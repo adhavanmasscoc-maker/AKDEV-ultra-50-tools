@@ -1,2 +1,71 @@
-# AKDEV-ultra-50-tools
-⚡ 50+ futuristic browser-based tools for PDF, text, image, developer, and student productivity — fast, responsive, and privacy-focused.
+\# ⚡ AKDEV Ultra Tools
+
+
+
+> Everything. Faster. Smarter.
+
+
+
+AKDEV Ultra Tools is a futuristic browser-based utility platform with 50+ tools for PDF, text, images, developers, and students.
+
+
+
+\## 🚀 Features
+
+
+
+\- PDF Tools
+
+\- Image Tools
+
+\- Text Tools
+
+\- Developer Tools
+
+\- Student Tools
+
+\- Responsive Cyberpunk UI
+
+\- Fast Browser Processing
+
+
+
+\## 🌐 Live Site
+
+
+
+https://akdev-official.vercel.app
+
+
+
+\## 🛠️ Technologies
+
+
+
+\- HTML
+
+\- CSS
+
+\- JavaScript
+
+\- PDF-Lib
+
+\- jsPDF
+
+\- html2canvas
+
+
+
+\## 👨‍💻 Developer(AADHAVAN)
+## 📜 License
+
+This project is proprietary software owned by AKDEV.
+
+Personal and educational usage only.
+
+Commercial reuse, redistribution, or cloning is prohibited.
+
+
+
+Made by AKDEV
+
