@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AKDEV Ultra Tools — Everything. Faster. Smarter.</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/browser-image-compression/2.0.2/browser-image-compression.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/browser-image-compression/2.0.2/browser-image-compression.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+          // Replace with your actual EmailJS Public Key
+          emailjs.init("'service_dplhn3i"); 
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <canvas id="bgc"></canvas>
+    <div id="nstack"></div>
+
+    <!-- ════════════ TOPBAR ════════════ -->
+    <header id="topbar" role="banner">
+        <!-- Hamburger (mobile) -->
+        <button id="menu-toggle" onclick="toggleSB()" aria-label="Toggle menu">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+
+        <!-- Logo = site redirect -->
+        <a href="https://akdev-official.vercel.app" target="_blank" rel="noopener noreferrer" class="logo-link"
+            title="Visit AKDEV Official Site" aria-label="AKDEV Official Portfolio">
+            <div class="logo-ico" aria-hidden="true">A</div>
+            <div class="logo-txt">
+                <span class="logo-n">AKDEV Ultra Tools</span>
+                <span class="logo-s">Everything. Faster. Smarter.</span>
+            </div>
+        </a>
+
+        <!-- Search -->
+        <div class="srch-wrap" role="search">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <label for="srch" class="sr-only">Search tools</label>
+            <input class="srch-inp" id="srch" placeholder="Search 50 tools…" oninput="filterTools(this.value)" autocomplete="off">
+        </div>
+
+        <div class="tb-sp"></div>
+
+        <!-- Site redirect button (desktop) -->
+        <a href="https://akdev-official.vercel.app" target="_blank" rel="noopener noreferrer" class="site-btn"
+            aria-label="Open AKDEV portfolio site">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+            akdev-official.vercel.app ↗
+        </a>
+
+        <!-- Sound -->
+        <div class="vol-wrap">
+            <span class="vol-lbl">VOL</span>
+            <input type="range" id="svol" min="0" max="1" step="0.05" value="0.4" oninput="setVol(this.value)" aria-label="Volume">
+            <button class="tb-btn" id="stoggle" onclick="toggleSound()">🔊 ON</button>
+        </div>
+    </header>
+
+    <!-- Sidebar overlay -->
+    <div id="sb-overlay" onclick="closeSB()" aria-hidden="true"></div>
+
+    <!-- ════════════ SIDEBAR ════════════ -->
+    <nav id="sidebar" role="navigation" aria-label="Tool categories">
+        <div class="sb-lbl">Navigation</div>
+        <div class="sb-item active" onclick="showSec('home')" data-sec="home" tabindex="0" role="button"
+            aria-label="Dashboard">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            Dashboard
+        </div>
+        <div class="sb-item" onclick="showSec('favs')" data-sec="favs" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            Favorites <span class="sb-badge" id="fav-cnt">0</span>
+        </div>
+        <div class="sb-item" onclick="showSec('recent')" data-sec="recent" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+            </svg>
+            Recent
+        </div>
+        <div class="sb-div"></div>
+        <div class="sb-lbl">PDF Tools</div>
+        <div class="sb-item" onclick="showSec('pdf')" data-sec="pdf" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+            </svg>
+            PDF Tools <span class="sb-badge">11</span>
+        </div>
+        <div class="sb-lbl">Text Tools</div>
+        <div class="sb-item" onclick="showSec('text')" data-sec="text" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <polyline points="4 7 4 4 20 4 20 7" />
+                <line x1="9" y1="20" x2="15" y2="20" />
+                <line x1="12" y1="4" x2="12" y2="20" />
+            </svg>
+            Text Tools <span class="sb-badge">9</span>
+        </div>
+        <div class="sb-lbl">Image Tools</div>
+        <div class="sb-item" onclick="showSec('image')" data-sec="image" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
+            </svg>
+            Image Tools <span class="sb-badge">6</span>
+        </div>
+        <div class="sb-lbl">Dev Tools</div>
+        <div class="sb-item" onclick="showSec('dev')" data-sec="dev" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+            </svg>
+            Dev Tools <span class="sb-badge">10</span>
+        </div>
+        <div class="sb-lbl">Student Tools</div>
+        <div class="sb-item" onclick="showSec('student')" data-sec="student" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+            Student Tools <span class="sb-badge">5</span>
+        </div>
+        <div class="sb-div"></div>
+        <div class="sb-lbl">Power Tools 🔥</div>
+        <div class="sb-item" onclick="showSec('power')" data-sec="power" tabindex="0" role="button">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+            Power Tools
+            <span class="sb-badge" style="background:linear-gradient(135deg,rgba(255,107,53,.25),rgba(255,51,102,.15));color:var(--orange)">3 NEW</span>
+        </div>
+    </nav>
+
+    <!-- ════════════ MAIN ════════════ -->
+    <main id="main" role="main">
+
+        <!-- DASHBOARD -->
+        <section id="sec-home" class="sec active">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#00c8ff15,#a855f715)">⚡</div>
+                <div>
+                    <div class="ph-title">AKDEV Ultra Tools</div>
+                    <div class="ph-sub">50 tools · 6 categories · Fast & browser-native</div>
+                </div>
+            </div>
+            <div class="dgrid" id="dash-stats"></div>
+
+            <!-- ── NEW TOOLS SPOTLIGHT ── -->
+            <div style="margin-bottom:20px">
+                <div
+                    style="font-family:var(--fH);font-size:9px;color:var(--orange);letter-spacing:2.5px;margin-bottom:11px;display:flex;align-items:center;gap:8px">
+                    🔥 NEW POWER TOOLS
+                    <span class="new-badge">JUST ADDED</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:13px"
+                    id="new-tools-grid"></div>
+            </div>
+
+            <div style="font-family:var(--fH);font-size:9px;color:var(--dim);letter-spacing:2.5px;margin-bottom:11px">
+                RECENT ACTIVITY</div>
+            <div id="dash-recent" style="margin-bottom:20px"></div>
+            <div style="font-family:var(--fH);font-size:9px;color:var(--dim);letter-spacing:2.5px;margin-bottom:11px">
+                ALL TOOLS</div>
+            <div class="tgrid" id="home-grid"></div>
+        </section>
+
+        <!-- FAVS -->
+        <section id="sec-favs" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#ff6b3515,#ff336615)">⭐</div>
+                <div>
+                    <div class="ph-title">Favorites</div>
+                    <div class="ph-sub">Your starred tools</div>
+                </div>
+            </div>
+            <div class="tgrid" id="fav-grid"></div>
+            <div id="fav-empty" style="display:none;text-align:center;padding:60px;color:var(--dim)">
+                <div style="font-size:44px;margin-bottom:10px">⭐</div>
+                <div style="font-family:var(--fH);font-size:14px">No favorites yet</div>
+                <div style="font-size:13px;margin-top:5px">Click ★ on any tool card</div>
+            </div>
+        </section>
+
+        <!-- RECENT -->
+        <section id="sec-recent" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#00ff8815,#00c8ff15)">🕒</div>
+                <div>
+                    <div class="ph-title">Recent Activity</div>
+                    <div class="ph-sub">Tools used recently</div>
+                </div>
+            </div>
+            <div id="recent-full"></div>
+            <div id="recent-empty" style="display:none;text-align:center;padding:60px;color:var(--dim)">
+                <div style="font-size:44px;margin-bottom:10px">🕒</div>
+                <div style="font-family:var(--fH);font-size:14px">No recent activity</div>
+            </div>
+        </section>
+
+        <!-- PDF -->
+        <section id="sec-pdf" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#ff336615,#a855f715)">📄</div>
+                <div>
+                    <div class="ph-title">PDF Tools</div>
+                    <div class="ph-sub">Merge, split, compress, convert and more</div>
+                </div>
+            </div>
+            <div class="tgrid" id="pdf-grid"></div>
+        </section>
+
+        <!-- TEXT -->
+        <section id="sec-text" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#00c8ff15,#00ff8815)">📝</div>
+                <div>
+                    <div class="ph-title">Text Tools</div>
+                    <div class="ph-sub">Format, analyze, convert and generate text</div>
+                </div>
+            </div>
+            <div class="tgrid" id="text-grid"></div>
+        </section>
+
+        <!-- IMAGE -->
+        <section id="sec-image" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#a855f715,#ff6b3515)">🖼️</div>
+                <div>
+                    <div class="ph-title">Image Tools</div>
+                    <div class="ph-sub">Compress, resize, convert and crop</div>
+                </div>
+            </div>
+            <div class="tgrid" id="image-grid"></div>
+        </section>
+
+        <!-- DEV -->
+        <section id="sec-dev" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#00ff8815,#00c8ff15)">💻</div>
+                <div>
+                    <div class="ph-title">Developer Tools</div>
+                    <div class="ph-sub">JSON, Base64, passwords, colors, regex</div>
+                </div>
+            </div>
+            <div class="tgrid" id="dev-grid"></div>
+        </section>
+
+        <!-- STUDENT -->
+        <section id="sec-student" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#ff6b3515,#a855f715)">🎓</div>
+                <div>
+                    <div class="ph-title">Student Tools</div>
+                    <div class="ph-sub">CGPA, attendance, pomodoro, resume</div>
+                </div>
+            </div>
+            <div class="tgrid" id="student-grid"></div>
+        </section>
+
+        <!-- POWER TOOLS -->
+        <section id="sec-power" class="sec">
+            <div class="ph">
+                <div class="ph-icon" style="background:linear-gradient(135deg,#ff6b3520,#ff336620)">⚡</div>
+                <div>
+                    <div class="ph-title">Power Tools <span class="new-badge">NEW 🔥</span></div>
+                    <div class="ph-sub">Text→JSON · HTML→PDF Ultra · URL→PDF — High-demand advanced tools</div>
+                </div>
+            </div>
+            <div class="tgrid" id="power-grid"></div>
+        </section>
+
+    </main>
+
+    <!-- ════════════ TOOL MODAL ════════════ -->
+    <div id="overlay" role="dialog" aria-modal="true" aria-labelledby="panel-title" onclick="closePanelBg(event)">
+        <div id="tpanel">
+            <div class="ph2">
+                <span id="p-ico" style="font-size:21px" aria-hidden="true"></span>
+                <h2 class="ph2-title" id="panel-title">Tool</h2>
+                <button class="ph2-close" onclick="closePanel()" aria-label="Close panel">✕ CLOSE</button>
+            </div>
+            <div class="pb" id="pbody">
+                <div class="scan" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════ FEEDBACK FAB ════════════ -->
+    <button id="fb-fab" onclick="toggleFB()" title="Send feedback or report a bug" aria-label="Open feedback chat">💬</button>
+
+    <!-- ════════════ FEEDBACK PANEL ════════════ -->
+    <div id="fb-panel" role="dialog" aria-labelledby="fb-title" aria-hidden="true">
+        <div class="fb-head">
+            <span style="font-size:17px">🤖</span>
+            <span class="fb-htitle" id="fb-title">AKDEV SUPPORT</span>
+            <button class="fb-hclose" onclick="toggleFB()" aria-label="Close feedback">✕</button>
+        </div>
+
+        <div class="fb-body">
+            <div class="fb-chat" id="fb-chat" aria-live="polite"></div>
+
+            <form id="fb-form" onsubmit="sendFB(event)">
+                <div class="fb-stars" id="fb-stars-container">
+                    <span class="fb-star" onclick="setRating(1)">★</span>
+                    <span class="fb-star" onclick="setRating(2)">★</span>
+                    <span class="fb-star" onclick="setRating(3)">★</span>
+                    <span class="fb-star" onclick="setRating(4)">★</span>
+                    <span class="fb-star active" onclick="setRating(5)">★</span>
+                </div>
+                <input type="hidden" name="rating" id="fb-rating-val" value="5">
+
+                <div class="fb-row">
+                    <label for="fb-inp" class="sr-only">Feedback message</label>
+                    <textarea class="fb-ta" id="fb-inp" name="message"
+          placeholder="Report a bug, suggest a feature…"
+          rows="1" maxlength="1000"
+          onkeydown="fbKey(event)"
+          oninput="fbResize(this)"></textarea>
+                    <button type="submit" class="fb-send" aria-label="Send feedback">➤</button>
+                </div>
+            </form>
+
+        </div>
+        <div class="fb-foot">Your feedback helps improve AKDEV Tools ✨</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
